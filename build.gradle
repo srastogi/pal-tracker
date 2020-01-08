@@ -1,0 +1,37 @@
+buildscript {
+    ext {
+        springBootVersion = "2.2.2.RELEASE"
+    }
+
+    repositories {
+        maven { url "http://platform-acceleration-lab-maven.s3.amazonaws.com" }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "io.pivotal.pal.assignments:assignments-plugin:4.3.1"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+    }
+}
+
+
+plugins {
+    id "java"
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: "io.pivotal.pal.assignments.plugin"
+
+assignments {
+    apiUrl = "https://waveland.education.pivotal.io/"
+    emails = ["srastogi@pivotal.io"]
+    cohortIdentifier = "pivotal-labs"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+}
