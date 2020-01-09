@@ -1,5 +1,4 @@
 dist: trusty
-sudo: false
 notifications:
   email: false
 env:
@@ -20,11 +19,11 @@ jobs:
         - git tag -f $RELEASE_TAG
       deploy:
         provider: releases
-        api_key: $GITHUB_OAUTH_TOKEN
+        token: $GITHUB_OAUTH_TOKEN
         file: "build/libs/pal-tracker.jar"
-        skip_cleanup: true
+        cleanup: true
     - stage: deploy to cf
-      language: bash
+      language: shell
       script:
         - echo "Downloading $RELEASE_TAG"
         - wget -P build/libs https://github.com/$GITHUB_USERNAME/pal-tracker/releases/download/$RELEASE_TAG/pal-tracker.jar
